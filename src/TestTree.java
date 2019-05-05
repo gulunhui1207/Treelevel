@@ -1,4 +1,3 @@
-import static org.junit.Assert.*;
 import org.junit.Test;
 /**
  * 测试单元，测试能不能正常创建树以及输出，某一层的节点
@@ -12,15 +11,15 @@ public class TestTree {
 	private Tree tree=new Tree();
 
 	@Test
-	public void test() {
-		tree.CreatTree();
-		tree.TreeLevel(tree.getTree(),3);
+	public void test1() {
+		tree.creatTree();
+		tree.treeLevel(tree.getTreeRoot(),3);
 		
 	}
 	@Test
 	public void test2() {
-		tree.CreatTree();
-		tree.TreeLevel(tree.getTree(),4);
+		tree.creatTree();
+		tree.treeLevel(tree.getTreeRoot(),4);
 	}
 
 }

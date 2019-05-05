@@ -10,21 +10,12 @@ import java.util.List;
  */
 public class Tree {
 	private static char[] treelist={'A','B','D','G','H','C','F'};
-	private static List<TNode> nodelist=null;
+	private  List<TNode> nodelist=null;
 	
-	private static class TNode{
-		char value;
-		TNode left,right;
-		TNode(char newnode){
-			left=null;
-			right=null;
-			value=newnode;
-		}
-	}
 	/**
 	 * 获取这棵树的头结点
 	 */
-	public static TNode getTree(){
+	public  TNode getTreeRoot(){
 		return nodelist.get(0);
 	}
 	/**
@@ -34,23 +25,23 @@ public class Tree {
 	 *
 	 *
 	 */
-	public static void CreatTree(){
+	public  void creatTree(){
 		nodelist= new LinkedList<TNode>();
 		for (int nodeIndex = 0; nodeIndex < treelist.length; nodeIndex++) {  
             nodelist.add(new TNode(treelist[nodeIndex]));  
         }
 		for (int parentIndex = 0; parentIndex < treelist.length / 2 - 1; parentIndex++) {  
 	            // 左孩子  
-			nodelist.get(parentIndex).left = nodelist.get(parentIndex * 2 + 1);  
+			nodelist.get(parentIndex).setLeft(nodelist.get(parentIndex * 2 + 1));  
 	            // 右孩子  
-			nodelist.get(parentIndex).right = nodelist.get(parentIndex * 2 + 2);  
+			nodelist.get(parentIndex).setRight(nodelist.get(parentIndex * 2 + 2));  
 	    }  
 		int lastParentIndex = treelist.length / 2 - 1;  
         // 左孩子 
-        nodelist.get(lastParentIndex).left = nodelist.get(lastParentIndex * 2 + 1);  
+		nodelist.get(lastParentIndex).setLeft(nodelist.get(lastParentIndex * 2 + 1)); 
         // 右孩子,如果数组的长度为奇数才建立右孩子  
         if (treelist.length % 2 == 1) {  
-            nodelist.get(lastParentIndex).right = nodelist.get(lastParentIndex * 2 + 2);  
+        	nodelist.get(lastParentIndex).setRight(nodelist.get(lastParentIndex * 2 + 2));   
         }  
 	}
 	/**
@@ -61,20 +52,20 @@ public class Tree {
 	 * @param level
 	 * @return 
 	 */
-	public static void TreeLevel(TNode tree,int level){
+	public void treeLevel(TNode tree,int level){
 		if(level==1){
 			System.out.println(tree.value);
 		}
-		else if(tree.left==null&&tree.right==null){
+		else if(tree.getLeft()==null&&tree.getRight()==null){
 			System.out.println("输入的层数大于该树的层数");
 		}
 		else{
-			TreeLevel(tree.left,level-1);
-			TreeLevel(tree.right,level-1);
+			treeLevel(tree.getLeft(),level-1);
+			treeLevel(tree.getRight(),level-1);
 		}
 	}
-	public static void main (String arg[]){
-		CreatTree();
-		TreeLevel(getTree(),3);
+	public  void main (String arg[]){
+		creatTree();
+		treeLevel(getTreeRoot(),3);
 	}
 }
